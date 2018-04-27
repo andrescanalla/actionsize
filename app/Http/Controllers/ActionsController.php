@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Action;
+use DB;
 
 class ActionsController extends Controller
 {
@@ -20,10 +21,7 @@ class ActionsController extends Controller
 
 	public function store(Request $request)
     {
-		$this->validate($request, [
-        'actividad' => 'boolean',
-        'dolor' => 'boolean',
-    ]);
+		
 	    $action = Action::create($request->all());
 
 	    return response()->json($action, 201);
@@ -42,5 +40,33 @@ class ActionsController extends Controller
 
 	    return response()->json(null, 204);
 	}
+
+	 public function lista()
+	{
+	    $lista=DB::table('actions')
+	    ->whereDay('created_at', '=', date('d'))
+	    ->orderBy('created_at', 'desc')
+	    ->get();
+
+	   
+
+	    return view('lista',["lista"=>$lista]);
+	    #return Action::all();
+	}
+
+	public function dia()
+	{
+	    $lista=DB::table('actions')
+	    ->whereDay('created_at', '=', date('d'))
+	    ->orderBy('created_at', 'asc')
+	    ->get();
+
+	   
+
+	    return $lista;
+	    #return Action::all();
+	}
+
+	
 
 }

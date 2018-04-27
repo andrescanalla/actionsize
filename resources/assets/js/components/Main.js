@@ -1,10 +1,76 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Product from './Product';
-import AddProduct from './AddProduct';
+import { Switch, Route } from "react-router-dom";
+import Home from "./Home";
+import Dia from "./Dia";
+
+class Main extends Component {
+  constructor() {  
+    super();
+    //Initialize the state in the constructor
+    this.state = {
+        actions: []        
+    }
+    this.handleAddAction = this.handleAddAction.bind(this);     
+  }
+  /*componentDidMount() is a lifecycle method
+   * that gets called after the component is rendered
+   */
+  componentDidMount() {
+    /* fetch API in action */
+    fetch('dia')
+        .then(response => {
+            return response.json();
+        })
+        .then(actions => {
+            //Fetched product is stored in the state
+            this.setState({ actions });
+        });
+  }
+
+  handleAddAction(action) {
+     
+    //product.price = Number(product.price);
+    /*Fetch API for post request */
+    fetch( '/api/actions', {
+        method:'post',
+        /* headers are important*/
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        
+        body: JSON.stringify(action)
+    })
+    .then(response => {
+        return response.json();
+    })
+    .then( data => {
+       
+        this.setState((prevState)=> ({
+            actions: prevState.actions.concat(data),
+            //currentProduct : data
+        }))
+    })
+ //update the state of products and currentProduct
+  }  
+
+  render() {
+    return (
+      <main id="page-wrap">
+          <Switch>          
+              <Route exact path="/" render={(props) =><Home {...props} actions={this.state.actions} handleAddAction={this.handleAddAction} />} />
+              <Route path="/dia" component={Dia} />        
+          </Switch>
+      </main>     
+    );
+  }
+}
+
+
 
 /* Main Component */
-class Main extends Component {
+class Mainnn extends Component {
 
   constructor() {
   
@@ -12,11 +78,12 @@ class Main extends Component {
     //Initialize the state in the constructor
     this.state = {
         products: [],
-        currentProduct: null
+        currentProduct: null     
     
     }
      this.handleAddProduct = this.handleAddProduct.bind(this);
   }
+
   /*componentDidMount() is a lifecycle method
    * that gets called after the component is rendered
    */
@@ -103,19 +170,22 @@ class Main extends Component {
         
     }
 
-    return (
-        <div>
-          <div style= {mainDivStyle}>
-            <div style={divStyle}>
-                <h3> All products </h3>
-                  <ul>
-                    { this.renderProducts() }
-                  </ul> 
+    
 
-            </div> 
+    return (
+        
+
+       
+        <div >  
+        
+         <div style= {mainDivStyle}>
+            
                 <Product product={this.state.currentProduct} />
                 <AddProduct onAdd={this.handleAddProduct} /> 
           </div>
+      
+
+         
               
         </div>
       
@@ -125,10 +195,3 @@ class Main extends Component {
 
 export default Main;
 
-/* The if statement is required so as to Render the component 
- * on pages that have a div with an ID of "root";  
- */ 
-
-if (document.getElementById('root')) {
-    ReactDOM.render(<Main />, document.getElementById('root'));
-}
