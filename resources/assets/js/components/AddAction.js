@@ -6,13 +6,13 @@ class AddAction extends Component {
     super(props);
        /* Initialize the state. */
        this.state = {
-          newAction: {
-              idaction:100,
-              dolor: true,
-              actividad: true,
-              comentario: 'haa'             
+          newAction: {             
+              dolor: false,
+              actividad: false,
+              comentario: '- -'             
           },
-          checkboxState: false
+          checkboxState: false,
+          checkboxState1: false,
         }
     
     //Boilerplate code for binding methods with `this`
@@ -23,11 +23,35 @@ class AddAction extends Component {
 
    
   /* callback to change the checkboxState to false when the checkbox is checked */
-  toggle(event) {
-    this.setState({
+  toggle(key, e) {
+    /*Duplicating and updating the state */
+    var state = Object.assign({}, this.state.newAction); 
+    state[key] = e.target.value;
+    this.setState({newAction: state });
+
+     {console.log(this.state.newAction)};
+
+     this.setState({
       checkboxState: !this.state.checkboxState
     });
+   {console.log(this.state.newAction)};
   }
+
+  /* callback to change the checkboxState to false when the checkbox is checked */
+  toggle1(key, e) {
+    /*Duplicating and updating the state */
+    var state = Object.assign({}, this.state.newAction); 
+    state[key] = e.target.value;
+    this.setState({newAction: state });
+
+     {console.log(this.state.newAction)};
+
+     this.setState({
+      checkboxState1: !this.state.checkboxState1
+    });
+   {console.log(this.state.newAction)};
+  }
+  
   /* This method dynamically accepts inputs and stores it in the state */
   handleInput(key, e) {
     
@@ -35,34 +59,34 @@ class AddAction extends Component {
     var state = Object.assign({}, this.state.newAction); 
     state[key] = e.target.value;
     this.setState({newAction: state });
+     {console.log(this.state.newAction)};
   }
  /* This method is invoked when submit button is pressed */
   handleSubmit(e) {
+     {console.log(this.state.newAction)};
     //preventDefault prevents page reload   
     e.preventDefault();
     /*A call back to the onAdd props. The control is handed over
      *to the parent component. The current state is passed 
      *as a param
      */
+     
     this.props.onAdd(this.state.newAction);
+     {console.log(this.state.newAction)};
   }
 
-
-  
-
-  render() { 
-  
-  const checkedOrNot = [];
-    checkedOrNot.push(
-      <p>{this.state.checkboxState ? 'Unchecked' : 'Checked'}</p>
-    );
-
-  var msg;
-    if (this.state.checkboxState) {
-      msg = 1;
+  veri(vari) {
+    if (vari) {
+      return 0;
     } else {
-      msg = 0;
+      return 1;
     }
+}
+
+
+  
+
+  render() {     
 
     return(
       <div> 
@@ -73,27 +97,35 @@ class AddAction extends Component {
          *handleSubmit method 
          */}
         <form onSubmit={this.handleSubmit}>
-         
-          <label> 
-            Dolor: 
-            {/*On every keystroke, the handeInput method is invoked */}
-            <input  type="checkbox" onClick={this.toggle} />
-             <input   type="hidenn" value={this.state.checkboxState} onChange={(e)=>this.handleInput('actividad',e)} />
-          </label>
-          
-          <label> 
-            Actividad: 
-            <input   type="checkbox" onChange={(e)=>this.handleInput('actividad',e)} />
-          </label>
-          
-          <label>
+          <div className="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+              <div className="form-group">
+                <label> 
+                  Dolor: 
+                 </label>
+                  {/*On every keystroke, the handeInput method is invoked */}
+                  <input  className="form-control" type="checkbox" value={this.veri(this.state.checkboxState)} onClick={(e)=>this.toggle('dolor',e)} />
+                  <label> 
+                  Actividad: 
+                </label>
+                  <input  className="form-control" type="checkbox" value={this.veri(this.state.checkboxState1)} onClick={(e)=>this.toggle1('actividad',e)}  />
+              </div>
+          </div>
+          <div className="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+              <div className="form-group">
+               <label>
             Comentario:
-            <input  type="text" onChange={(e)=>this.handleInput('comentario', e)}/>
           </label>
+          <input className="form-control" type="text" onChange={(e)=>this.handleInput('comentario', e)}/>
+                
+              </div>
+          </div>
+          
+         
+          
 
-          <input  type="submit" value="Submit" />
+          <input className="form-control" type="submit" value="Submit" />
         </form>
-        {checkedOrNot}
+     
       </div>
     </div>)
   }

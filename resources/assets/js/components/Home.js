@@ -1,8 +1,6 @@
-import React from "react";
+import React, { Component } from 'react';
 import GraficoDia from "./GraficoDia";
-import Lista from "./Lista";
 import AddAction from "./AddAction";
-
 
 
 const Home = ({actions, handleAddAction}) => <div>
@@ -12,8 +10,7 @@ const Home = ({actions, handleAddAction}) => <div>
 					<div className="col-md-12">
 						<div className="col-md-4">
 							<div className="panel panel-success">
-								<div className="panel-heading">
-									 
+								<div className="panel-heading">									 
 									 <AddAction onAdd={handleAddAction} /> 
 									 <h2>Listado</h2>
 								</div>
@@ -22,8 +19,8 @@ const Home = ({actions, handleAddAction}) => <div>
 									<thead style={{background:"#A9D0F5"}}>
 										<tr>
 											<th>Hora</th>	
-											<th>Con Dolor</th>	
-											<th>En Actividad</th>	
+											<th>Dolor</th>	
+											<th>Actividad</th>	
 											<th>Comentario</th>	
 										</tr>
 									</thead>
@@ -47,7 +44,7 @@ const Home = ({actions, handleAddAction}) => <div>
 									 <h2>Intervalo Diario</h2>
 								</div>
 								<div className="panel-body">
-										<GraficoDia/>									
+										<GraficoDia actions={actions}/>									
 								</div>
 							</div>
 						</div>
@@ -55,3 +52,38 @@ const Home = ({actions, handleAddAction}) => <div>
 					</div>;
 
 export default Home;
+
+class Lista extends Component {
+  render() {
+   var dolor;   
+    if(this.props.dolor==1){ 
+    	dolor="Si"
+    }
+    else{
+    	dolor="No"
+    }
+
+    var actividad;   
+    if(this.props.actividad==1){ 
+    	actividad="Si"
+    }
+    else{
+    	actividad="No"
+    }
+    
+    return (  <tr>
+                <td>
+                  {this.props.time}
+                </td>        
+                <td>
+                   {dolor}
+                </td> 
+                <td>
+                  {actividad}
+                </td>
+                <td>
+                  {this.props.comentario}
+                </td>     
+            </tr>);
+  }
+}

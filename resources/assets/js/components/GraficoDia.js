@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Scatter} from 'react-chartjs-2';
+
 
 const data = {
   labels: ['Scatter'],
@@ -30,12 +31,17 @@ const data = {
   ]
 };
 
-export default React.createClass({
-  displayName: 'ScatterExample',
-
-  render() {
+export default class GraficoDia  extends Component {
+  render() {   
+     
     return (
-      <div>        
+      <div>
+        
+          {data.datasets.map(ac=>
+            <h1> {ac.data.x}</h1>
+            )}
+            
+                
         <Scatter data={data}
         options={{
         scales: {
@@ -51,4 +57,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+};

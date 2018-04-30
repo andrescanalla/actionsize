@@ -7,7 +7,8 @@ export default class Lista extends Component {
                   {this.props.time}
                 </td>        
                 <td>
-                  {this.props.dolor}
+                  if (this.props.dolor==1){"si"}
+                    else{"no"}
                 </td> 
                 <td>
                   {this.props.actividad}

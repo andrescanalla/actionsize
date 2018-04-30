@@ -15,8 +15,8 @@
       <table class="table table-striped table-bordered table-condensed table-hover">
         <thead>         
           <th style="text-align: center">Fecha</th>
-          <th style="text-align: center">Con Dolor</th>
-          <th style="text-align: center">En Actividad</th>          
+          <th style="text-align: center">Dolor</th>
+          <th style="text-align: center">Actividad</th>          
           <th style="text-align: center">Intervalo</th>          
         </thead>
         @php $nn = 0;
