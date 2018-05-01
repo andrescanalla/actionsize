@@ -95796,10 +95796,10 @@ var AddAction = function (_Component) {
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'text', onChange: function onChange(e) {
                     return _this2.handleInput('comentario', e);
-                  } })
+                  } }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'submit', value: 'New Action' })
               )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'submit', value: 'Submit' })
+            )
           )
         )
       );

@@ -112,22 +112,17 @@ class AddAction extends Component {
           </div>
           <div className="col-lg-6 col-sm-6 col-md-6 col-xs-12">
               <div className="form-group">
-               <label>
-            Comentario:
-          </label>
-          <input className="form-control" type="text" onChange={(e)=>this.handleInput('comentario', e)}/>
-                
+                 <label>
+                    Comentario:
+                </label>
+                <input className="form-control" type="text" onChange={(e)=>this.handleInput('comentario', e)}/>
+                <input className="form-control" type="submit" value="New Action" />       
               </div>
-          </div>
-          
-         
-          
-
-          <input className="form-control" type="submit" value="Submit" />
-        </form>
-     
+          </div>   
+        </form>     
+        </div>
       </div>
-    </div>)
+    )
   }
 }
 
