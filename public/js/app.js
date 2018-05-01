@@ -95757,47 +95757,51 @@ var AddAction = function (_Component) {
             ' Add new Action '
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'form',
-            { onSubmit: this.handleSubmit },
+            'div',
+            { className: 'row' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'col-lg-6 col-sm-6 col-md-6 col-xs-12' },
+              'form',
+              { onSubmit: this.handleSubmit },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { className: 'form-group' },
+                { className: 'col-lg-6 col-sm-6 col-md-6 col-xs-12' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'label',
-                  null,
-                  'Dolor:'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'checkbox', value: this.veri(this.state.checkboxState), onClick: function onClick(e) {
-                    return _this2.toggle('dolor', e);
-                  } }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'label',
-                  null,
-                  'Actividad:'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'checkbox', value: this.veri(this.state.checkboxState1), onClick: function onClick(e) {
-                    return _this2.toggle1('actividad', e);
-                  } })
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'col-lg-6 col-sm-6 col-md-6 col-xs-12' },
+                  'div',
+                  { className: 'form-group' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'label',
+                    null,
+                    'Dolor:'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'checkbox', value: this.veri(this.state.checkboxState), onClick: function onClick(e) {
+                      return _this2.toggle('dolor', e);
+                    } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'label',
+                    null,
+                    'Actividad:'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'checkbox', value: this.veri(this.state.checkboxState1), onClick: function onClick(e) {
+                      return _this2.toggle1('actividad', e);
+                    } })
+                )
+              ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { className: 'form-group' },
+                { className: 'col-lg-6 col-sm-6 col-md-6 col-xs-12' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'label',
-                  null,
-                  'Comentario:'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'text', onChange: function onChange(e) {
-                    return _this2.handleInput('comentario', e);
-                  } }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'submit', value: 'New Action' })
+                  'div',
+                  { className: 'form-group' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'label',
+                    null,
+                    'Comentario:'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'text', onChange: function onChange(e) {
+                      return _this2.handleInput('comentario', e);
+                    } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'submit', value: 'New Action' })
+                )
               )
             )
           )

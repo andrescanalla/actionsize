@@ -89,14 +89,14 @@ class AddAction extends Component {
   render() {     
 
     return(
-      <div> 
-       
+      <div>       
         <div> 
          <h2> Add new Action </h2>
         {/*when Submit button is pressed, the control is passed to 
          *handleSubmit method 
          */}
-        <form onSubmit={this.handleSubmit}>
+        <div className="row">
+        <form onSubmit={this.handleSubmit}>        
           <div className="col-lg-6 col-sm-6 col-md-6 col-xs-12">
               <div className="form-group">
                 <label> 
@@ -119,7 +119,8 @@ class AddAction extends Component {
                 <input className="form-control" type="submit" value="New Action" />       
               </div>
           </div>   
-        </form>     
+        </form>
+        </div>     
         </div>
       </div>
     )
