@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
-import Dia from "./Dia";
+import Semana from "./Semana";
 
 class Main extends Component {
   constructor() {  
@@ -60,7 +60,7 @@ class Main extends Component {
       <main id="page-wrap">
           <Switch>          
               <Route exact path="/" render={(props) =><Home {...props} actions={this.state.actions} handleAddAction={this.handleAddAction} />} />
-              <Route path="/dia" component={Dia} />        
+              <Route path="/semana" component={Semana} />        
           </Switch>
       </main>     
     );

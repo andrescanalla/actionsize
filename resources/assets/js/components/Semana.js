@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import GraficoDia from "./GraficoDia";
+import GraficoSemana from "./GraficoSemana";
 import AddAction from "./AddAction";
 
-class Home extends Component {
+class Semana extends Component {
   constructor() {  
     super();
     //Initialize the state in the constructor
     this.state = {
-        actions: [],
-        chartData:{}        
+        actions: []          
     }
     this.handleAddAction = this.handleAddAction.bind(this);     
   }
@@ -94,10 +93,10 @@ class Home extends Component {
 						<div className="col-md-8" style={{height:900}}>
 							<div className="panel panel-success">
 								<div className="panel-heading">
-									 <h2>Intervalo Diario</h2>
+									 <h2>Ultimos 7 Dias</h2>
 								</div>
 								<div className="panel-body">
-										<GraficoDia />									
+										<GraficoSemana />									
 								</div>
 							</div>
 						</div>
@@ -106,57 +105,7 @@ class Home extends Component {
 					);
 	}
 }
-    export default Home;
-
-
-const Homes = ({actions, handleAddAction}) => <div>
-					<h1 style={{margin:"-10px 0px 30px 0px"}}>
-						Action size
-					</h1>
-					<div className="col-md-12">
-						<div className="col-md-4">
-							<div className="panel panel-success">
-								<div className="panel-heading">									 
-									 <AddAction onAdd={handleAddAction} /> 
-									 <h2>Listado</h2>
-								</div>
-							<div className="panel-body">
-								<table className="table table-striped table-condensed table-hover dataTable">
-									<thead style={{background:"#A9D0F5"}}>
-										<tr>
-											<th>Hora</th>	
-											<th>Dolor</th>	
-											<th>Actividad</th>	
-											<th>Comentario</th>	
-										</tr>
-									</thead>
-									<tbody>
-									{actions.map(action =>
-										<Lista 
-											key={action.idaction}
-											time={action.created_at}
-											dolor={action.dolor}
-											actividad={action.actividad}
-											comentario={action.comentario}
-											/>)}
-									</tbody>
-								</table>
-							</div>
-							</div>
-						</div>
-						<div className="col-md-8" style={{height:900}}>
-							<div className="panel panel-success">
-								<div className="panel-heading">
-									 <h2>Intervalo Diario</h2>
-								</div>
-								<div className="panel-body">
-										<GraficoDia actions={actions}/>									
-								</div>
-							</div>
-						</div>
-					</div>
-					</div>;
-
+    export default Semana;
 
 
 class Lista extends Component {

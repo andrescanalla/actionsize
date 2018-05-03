@@ -16,4 +16,6 @@ Route::get('/', function () {
 });
 Route::get('phone', 'ActionsController@lista' );
 Route::get('dia', 'ActionsController@dia' );
+Route::get('graficodia', 'ActionsController@graficodia' );
+Route::get('graficosemana', 'ActionsController@graficosemana' );
 

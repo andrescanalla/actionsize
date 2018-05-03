@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
-import {Scatter} from 'react-chartjs-2';
+import {Scatter, Bar} from 'react-chartjs-2';
 
 
-const data = {
+export default class GraficoDia  extends Component {
+  constructor(){
+    super();
+    this.state = {
+      chartData:{}
+    }
+  }
+
+   componentWillMount(){
+    this.getChartData();
+  }
+
+   getChartData(){
+    /* fetch API in action */
+    fetch('graficosemana')
+        .then(response => {
+            return response.json();
+        })
+        .then(chartData => {
+            //Fetched product is stored in the state
+            this.setState({ chartData });
+        });
+   }
+
+  render() { 
+  const data = {
   labels: ['Scatter'],
   datasets: [
     {
@@ -18,42 +43,57 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 8,
       pointHitRadius: 10,
-      data: [
-        { x: 65, y: 75 },
-        { x: 59, y: 49 },
-        { x: 80, y: 90 },
-        { x: 81, y: 29 },
-        { x: 56, y: 36 },
-        { x: 55, y: 25 },
-        { x: 40, y: 18 },
-      ]
+      data: this.state.chartData
     }
   ]
+};  
+
+const data2 = {
+  labels: this.state.chartData.label,
+  datasets: [
+    {
+      label: 'Dolor',
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: this.state.chartData.dolor,
+    },
+    {
+      label: 'Sin Dolor',
+      backgroundColor: 'rgba(155,99,132,0.2)',
+      borderColor: 'rgba(155,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(155,99,132,0.4)',
+      hoverBorderColor: 'rgba(1S55,99,132,1)',
+      data: this.state.chartData.sinDolor,
+    }
+    
+  ]
+  
+    
+  
+
 };
 
-export default class GraficoDia  extends Component {
-  render() {   
-     
-    return (
+       return (
+        
       <div>
         
-          {data.datasets.map(ac=>
-            <h1> {ac.data.x}</h1>
-            )}
+         
             
-                
-        <Scatter data={data}
-        options={{
+         <Bar data={data2} options={{
         scales: {
             xAxes: [{
-                type: 'time',
-                time: {
-                    
-                }
+                stacked: true
+            }],
+            yAxes: [{
+                stacked: true
             }]
         }
-    }}
-        />
+    }} />      
+        
       </div>
     );
   }
