@@ -9,14 +9,21 @@ class Main extends Component {
     super();
     //Initialize the state in the constructor
     this.state = {
-        actions: []        
+        actions: [], 
+        chartDataS:{},
+        chartDataD:{}
+               
     }
     this.handleAddAction = this.handleAddAction.bind(this);     
   }
   /*componentDidMount() is a lifecycle method
    * that gets called after the component is rendered
    */
-  componentDidMount() {
+   componentDidMount(){
+    this.getChartDataS();
+   }
+
+   componentWillMount() {
     /* fetch API in action */
     fetch('dia')
         .then(response => {
@@ -26,7 +33,33 @@ class Main extends Component {
             //Fetched product is stored in the state
             this.setState({ actions });
         });
+     
+     this.getChartDataD();
   }
+
+  getChartDataS(){
+    /* fetch API in action */
+    fetch('graficosemana')
+        .then(response => {
+            return response.json();
+        })
+        .then(chartDataS => {
+            //Fetched product is stored in the state
+            this.setState({ chartDataS });
+        });
+   }
+
+   getChartDataD(){
+    /* fetch API in action */
+    fetch('graficodia')
+        .then(response => {
+            return response.json();
+        })
+        .then(chartDataD => {
+            //Fetched product is stored in the state
+            this.setState({ chartDataD });
+        });
+   }
 
   handleAddAction(action) {
      
@@ -59,7 +92,7 @@ class Main extends Component {
     return (
       <main id="page-wrap">
           <Switch>          
-              <Route exact path="/" render={(props) =><Home {...props} actions={this.state.actions} handleAddAction={this.handleAddAction} />} />
+              <Route exact path="/" render={(props) =><Home {...props} actions={this.state.actions} chartDataD={this.state.chartDataD} handleAddAction={this.handleAddAction} />} />
               <Route path="/semana" component={Semana} />        
           </Switch>
       </main>     

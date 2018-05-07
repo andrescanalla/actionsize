@@ -71,7 +71,7 @@ class ActionsController extends Controller
 
 	    }
 
-	   
+	   #$lista = ['lista'=>$lista, 'grafico'=>$lista2];
 
 	    return response()->json($lista, 200);
 	    #return Action::all();

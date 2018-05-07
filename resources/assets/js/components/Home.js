@@ -3,57 +3,13 @@ import GraficoDia from "./GraficoDia";
 import AddAction from "./AddAction";
 
 class Home extends Component {
-  constructor() {  
-    super();
+  constructor(props) {  
+    super(props);
     //Initialize the state in the constructor
-    this.state = {
-        actions: [],
-        chartData:{}        
-    }
-    this.handleAddAction = this.handleAddAction.bind(this);     
-  }
-
-   /*componentDidMount() is a lifecycle method
-   * that gets called after the component is rendered
-   */
-  componentDidMount() {
-    /* fetch API in action */
-    fetch('dia')
-        .then(response => {
-            return response.json();
-        })
-        .then(actions => {
-            //Fetched product is stored in the state
-            this.setState({ actions });
-        });
-  }
-
-  handleAddAction(action) {
-     
-    //product.price = Number(product.price);
-    /*Fetch API for post request */
-    fetch( '/api/actions', {
-        method:'post',
-        /* headers are important*/
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        
-        body: JSON.stringify(action)
-    })
-    .then(response => {
-        return response.json();
-    })
-    .then( data => {
-       
-        this.setState((prevState)=> ({
-            actions: prevState.actions.concat(data),
-            //currentProduct : data
-        }))
-    })
- //update the state of products and currentProduct
-  }  
+    this.state = props
+               
+    
+   }  
 
   render() {
     return (<div>
@@ -64,7 +20,7 @@ class Home extends Component {
 						<div className="col-md-4">
 							<div className="panel panel-success">
 								<div className="panel-heading">									 
-									 <AddAction onAdd={this.handleAddAction} /> 
+									 <AddAction onAdd={this.props.handleAddAction} /> 
 									 <h2>Listado</h2>
 								</div>
 							<div className="panel-body">
@@ -78,7 +34,7 @@ class Home extends Component {
 										</tr>
 									</thead>
 									<tbody>
-									{this.state.actions.map(action =>
+									{this.props.actions.map(action =>
 										<Lista 
 											key={action.idaction}
 											time={action.created_at}
@@ -97,7 +53,7 @@ class Home extends Component {
 									 <h2>Intervalo Diario</h2>
 								</div>
 								<div className="panel-body">
-										<GraficoDia />									
+										<GraficoDia chartData={this.props.chartDataD}/>									
 								</div>
 							</div>
 						</div>
