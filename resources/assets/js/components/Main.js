@@ -97,6 +97,9 @@ class Main extends Component {
   render() {
     return (
       <main id="page-wrap">
+        <h1 style={{margin:"-10px 0px 30px 0px"}}>
+            Action size
+          </h1>
           <Switch>          
               <Route exact path="/" render={(props) =><Home {...props} 
               actions={this.state.actions} 
@@ -107,7 +110,10 @@ class Main extends Component {
               chartDataUS={this.state.chartDataD.sinU} 
               chartDataUI={this.state.chartDataD.intervaloU} 
               handleAddAction={this.handleAddAction} />} />
-              <Route path="/semana" component={Semana} />        
+              <Route path="/semana" render={(props) =><Semana {...props} 
+              chartDataS={this.state.chartDataS}
+               />}  />      
+              }
           </Switch>
       </main>     
     );

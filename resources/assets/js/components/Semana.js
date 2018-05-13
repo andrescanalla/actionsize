@@ -1,107 +1,63 @@
 import React, { Component } from 'react';
-import GraficoSemana from "./GraficoSemana";
-import AddAction from "./AddAction";
+import {Bar} from 'react-chartjs-2';
 
 class Semana extends Component {
-  constructor() {  
-    super();
-    //Initialize the state in the constructor
-    this.state = {
-        actions: []          
-    }
-    this.handleAddAction = this.handleAddAction.bind(this);     
-  }
-
-   /*componentDidMount() is a lifecycle method
-   * that gets called after the component is rendered
-   */
-  componentDidMount() {
-    /* fetch API in action */
-    fetch('dia')
-        .then(response => {
-            return response.json();
-        })
-        .then(actions => {
-            //Fetched product is stored in the state
-            this.setState({ actions });
-        });
-  }
-
-  handleAddAction(action) {
-     
-    //product.price = Number(product.price);
-    /*Fetch API for post request */
-    fetch( '/api/actions', {
-        method:'post',
-        /* headers are important*/
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        
-        body: JSON.stringify(action)
-    })
-    .then(response => {
-        return response.json();
-    })
-    .then( data => {
-       
-        this.setState((prevState)=> ({
-            actions: prevState.actions.concat(data),
-            //currentProduct : data
-        }))
-    })
- //update the state of products and currentProduct
-  }  
+  constructor(props) {  
+    super(props);      
+    }    
 
   render() {
-    return (<div>
-					<h1 style={{margin:"-10px 0px 30px 0px"}}>
-						Action size
-					</h1>
-					<div className="col-md-12">
-						<div className="col-md-4">
-							<div className="panel panel-success">
-								<div className="panel-heading">									 
-									 <AddAction onAdd={this.handleAddAction} /> 
-									 <h2>Listado</h2>
-								</div>
-							<div className="panel-body">
-								<table className="table table-striped table-condensed table-hover dataTable">
-									<thead style={{background:"#A9D0F5"}}>
-										<tr>
-											<th>Hora</th>	
-											<th>Dolor</th>	
-											<th>Actividad</th>	
-											<th>Comentario</th>	
-										</tr>
-									</thead>
-									<tbody>
-									{this.state.actions.map(action =>
-										<Lista 
-											key={action.idaction}
-											time={action.created_at}
-											dolor={action.dolor}
-											actividad={action.actividad}
-											comentario={action.comentario}
-											/>)}
-									</tbody>
-								</table>
-							</div>
-							</div>
-						</div>
-						<div className="col-md-8" style={{height:900}}>
-							<div className="panel panel-success">
-								<div className="panel-heading">
-									 <h2>Ultimos 7 Dias</h2>
-								</div>
-								<div className="panel-body">
-										<GraficoSemana />									
-								</div>
-							</div>
-						</div>
-					</div>
-					</div>
+    const data2 = {
+  labels: this.props.chartDataS.label,
+  datasets: [
+    {
+      label: 'Con Dolor',
+      backgroundColor: 'rgba(200,19,532,0.2)',
+      borderColor: 'rgba(200,19,532,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(200,19,532,0.4)',
+      hoverBorderColor: 'rgba(200,19,532,1)',
+      data: this.props.chartDataS.dolor,
+    },
+    {
+      label: 'Sin Dolor',
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: this.props.chartDataS.sinDolor,
+    }    
+  ]
+};
+    return (<div>					
+    					<div className="col-md-12">						
+    						<div className="col-md-8" style={{height:900}}>
+    							<div className="panel panel-success">
+    								<div className="panel-heading">
+    									 <h2>Ultimos 7 Dias</h2>
+    								</div>
+    								<div className="panel-body">
+    										<div>           
+                           <Bar 
+                              data={data2}
+                              options={{
+                                scales: {
+                                  xAxes: [{
+                                      stacked: true
+                                  }],
+                                  yAxes: [{
+                                      stacked: true
+                                  }]
+                                }
+                              }}
+                            />              
+                        </div>							
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+					 </div>
 					);
 	}
 }
