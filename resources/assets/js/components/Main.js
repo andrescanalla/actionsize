@@ -91,6 +91,7 @@ class Main extends Component {
     })
  //update the state of products and currentProduct
    this.getChartDataD();
+   this.getChartDataS();
    this.getActions();
   }  
 

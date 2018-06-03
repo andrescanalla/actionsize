@@ -203,7 +203,7 @@ class ActionsController extends Controller
 	    while ($n >= 0) {
 	    		$dolor[]=DB::table('actions')
 	    ->where('dolor', '=',"1")
-	    ->whereBetween('created_at', [Carbon::now()->startOfDay()->subDay($n), Carbon::now()->endOfDay()->subDay($n) ])	    
+	    ->whereBetween('created_at', [Carbon::now()->startOfDay()->subDay($n), Carbon::now()->endOfDay()->subDay($n) ]) 
 	    ->count();
 	    $n=$n-1;
 	    	}	
@@ -230,7 +230,4 @@ class ActionsController extends Controller
 	    return response()->json($semana, 200);
 	    #return Action::all();
 	}
-
-	
-
 }
