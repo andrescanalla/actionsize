@@ -2,56 +2,72 @@ import React, { Component } from 'react';
 import GraficoDia from "./GraficoDia";
 import AddAction from "./AddAction";
 
+class Home extends Component {
+  constructor(props) {  
+    super(props);
+    //Initialize the state in the constructor
+    this.state = this.props
+               
+    
+   }  
 
-const Home = ({actions, handleAddAction}) => <div>
-					<h1 style={{margin:"-10px 0px 30px 0px"}}>
-						Action size
-					</h1>
-					<div className="col-md-12">
-						<div className="col-md-4">
-							<div className="panel panel-success">
-								<div className="panel-heading">									 
-									 <AddAction onAdd={handleAddAction} /> 
-									 <h2>Listado</h2>
-								</div>
-							<div className="panel-body">
-								<table className="table table-striped table-condensed table-hover dataTable">
-									<thead style={{background:"#A9D0F5"}}>
-										<tr>
-											<th>Hora</th>	
-											<th>Dolor</th>	
-											<th>Actividad</th>	
-											<th>Comentario</th>	
-										</tr>
-									</thead>
-									<tbody>
-									{actions.map(action =>
-										<Lista 
-											key={action.idaction}
-											time={action.created_at}
-											dolor={action.dolor}
-											actividad={action.actividad}
-											comentario={action.comentario}
-											/>)}
-									</tbody>
-								</table>
+  render() {
+    return (<div>					
+				<div className="col-md-12">
+					<div className="col-md-4">
+						<div className="panel panel-success">
+							<div className="panel-heading">									 
+								 <AddAction onAdd={this.props.handleAddAction} /> 									 
 							</div>
-							</div>
+						<div className="panel-body">
+							<table className="table table-striped table-condensed table-hover dataTable">
+								<thead style={{background:"#A9D0F5"}}>
+									<tr>
+										<th>Hora</th>	
+										<th>Dolor</th>	
+										<th>Actividad</th>	
+										<th>Intervalo</th>	
+									</tr>
+								</thead>
+								<tbody>
+								{this.props.actions.map(action =>
+									<Lista 
+										key={action.idaction}
+										time={action.hora}
+										dolor={action.dolor}
+										actividad={action.actividad}
+										intervalo={action.intervalo}
+										/>)}
+								</tbody>
+							</table>
 						</div>
-						<div className="col-md-8" style={{height:900}}>
-							<div className="panel panel-success">
-								<div className="panel-heading">
-									 <h2>Intervalo Diario</h2>
-								</div>
-								<div className="panel-body">
-										<GraficoDia actions={actions}/>									
-								</div>
+						</div>
+					</div>
+					<div className="col-md-8" >
+						<div className="panel panel-success">
+							<div className="panel-heading">
+								 <h2>Intervalo Diario</h2>
+							</div>
+							<div className="panel-body">
+									<GraficoDia 
+										chartDataG={this.props.chartDataDGrafico} 
+										chartDataI={this.props.chartDataDIntervalo} 
+										chartData={this.props.chartData} 
+										chartDataUG={this.props.chartDataUG}
+										chartDataUS={this.props.chartDataUS}
+										chartDataUI={this.props.chartDataUI}
+										 />									
 							</div>
 						</div>
 					</div>
-					</div>;
+				</div>
+			</div>);
+	}
+}
+    export default Home;
 
-export default Home;
+
+
 
 class Lista extends Component {
   render() {
@@ -82,7 +98,7 @@ class Lista extends Component {
                   {actividad}
                 </td>
                 <td>
-                  {this.props.comentario}
+                  {this.props.intervalo} Minutos
                 </td>     
             </tr>);
   }

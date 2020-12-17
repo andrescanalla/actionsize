@@ -1,8 +1,35 @@
 import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2';
 
-const data = {
-  labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
+class GraficoSemana extends Component {
+ 
+  constructor(){
+    super();
+    this.state = {
+      chartData:{}
+    }
+  }
+
+   componentWillMount(){
+    this.getChartData();
+  }
+
+   getChartData(){
+    /* fetch API in action */
+    fetch('graficosemana')
+        .then(response => {
+            return response.json();
+        })
+        .then(chartData => {
+            //Fetched product is stored in the state
+            this.setState({ chartData });
+        });
+   }
+
+  render() { 
+  
+const data2 = {
+  labels: this.state.chartData.label,
   datasets: [
     {
       label: 'Con Dolor',
@@ -11,7 +38,7 @@ const data = {
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(200,19,532,0.4)',
       hoverBorderColor: 'rgba(200,19,532,1)',
-      data: [15, 29, 60, 11, 26, 95, 10]
+      data: this.state.chartData.dolor,
     },
     {
       label: 'Sin Dolor',
@@ -20,23 +47,15 @@ const data = {
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }
+      data: this.state.chartData.sinDolor,
+    }    
   ]
 };
-
-class GraficoSemana extends Component {
- 
-  render() {
-    return (
-      <div>
-       
-        <Bar
-          data={data}
-          width={5}
-          height={400}
-          options={{
-            maintainAspectRatio: false , scales: {
+return (
+        
+      <div>           
+         <Bar data={data2} options={{
+        scales: {
             xAxes: [{
                 stacked: true
             }],
@@ -44,12 +63,12 @@ class GraficoSemana extends Component {
                 stacked: true
             }]
         }
-          }}
-        />
+    }}/>              
       </div>
     );
   }
-}
+};
+
 
 export default GraficoSemana;
 
